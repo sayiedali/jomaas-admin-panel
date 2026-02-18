@@ -15,7 +15,7 @@ const { Option } = Select;
 const SauceForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [sauceData, setSauceData] = useState({
@@ -33,7 +33,10 @@ const SauceForm = () => {
 
   const handleSubmit = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/sauce", sauceData)
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/sauce",
+        sauceData,
+      )
       .then((res) => {
         if (res.data.message === "Your Sauce Item Successfully Created!!") {
           location.reload();
@@ -58,9 +61,12 @@ const SauceForm = () => {
   // delete donair function
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletesauce", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletesauce",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -69,9 +75,11 @@ const SauceForm = () => {
   // get all donairs
   let [allSauce, setAllsauce] = useState([]);
   useEffect(() => {
-    axios.get("https://jomaas-backend.onrender.com/api/v1/add-menu/getsauce").then((res) => {
-      setAllsauce(res.data);
-    });
+    axios
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getsauce")
+      .then((res) => {
+        setAllsauce(res.data);
+      });
   }, []);
 
   // date format function
@@ -125,10 +133,13 @@ const SauceForm = () => {
   // update the donair data from database
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatesauce", {
-        id: editID,
-        updatedSauce: sauceData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatesauce",
+        {
+          id: editID,
+          updatedSauce: sauceData,
+        },
+      )
       .then((res) => {
         if (res.data.message === "Your Sauce Item Successfully Updated!!") {
           location.reload();
@@ -156,10 +167,13 @@ const SauceForm = () => {
 
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/saucestatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/saucestatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -167,10 +181,13 @@ const SauceForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/saucestatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/saucestatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -297,7 +314,7 @@ const SauceForm = () => {
                       )}
                     </div>
                   </div>
-                )
+                ),
             )}
         </div>
       </div>

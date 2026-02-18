@@ -13,7 +13,7 @@ const { Option } = Select;
 const SpecialityPastaForm = () => {
   const data = useSelector((state) => state);
   const [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   const [updateButton, setUpdateButton] = useState(false);
   const [specialityPastaData, setSpecialityPastaData] = useState({
@@ -49,8 +49,8 @@ const SpecialityPastaForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/specialtypasta",
-        specialityPastaData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/specialtypasta",
+        specialityPastaData,
       )
       .then((res) => {
         if (
@@ -68,8 +68,7 @@ const SpecialityPastaForm = () => {
               medium: "",
               large: "",
             },
-            branch:
-              data.userData.userInfo && data.userData.userInfo.branchName,
+            branch: data.userData.userInfo && data.userData.userInfo.branchName,
           });
         } else {
           toast.error(res.data.message);
@@ -84,10 +83,10 @@ const SpecialityPastaForm = () => {
   const handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletespecialtypasta",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletespecialtypasta",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -98,7 +97,7 @@ const SpecialityPastaForm = () => {
   useEffect(() => {
     axios
       .get(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/getspecialtypastas"
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/getspecialtypastas",
       )
       .then((res) => {
         setAllSpecialityPastas(res.data);
@@ -162,11 +161,11 @@ const SpecialityPastaForm = () => {
   const handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatespecialtypasta",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatespecialtypasta",
         {
           id: editID,
           updatedSpecialtyPasta: specialityPastaData,
-        }
+        },
       )
       .then((res) => {
         if (
@@ -184,8 +183,7 @@ const SpecialityPastaForm = () => {
               medium: "",
               large: "",
             },
-            branch:
-              data.userData.userInfo && data.userData.userInfo.branchName,
+            branch: data.userData.userInfo && data.userData.userInfo.branchName,
           });
         } else {
           toast.error(res.data.message);
@@ -197,15 +195,15 @@ const SpecialityPastaForm = () => {
       });
   };
 
-   // panzarotti available status functionality
-   let handleNotAvailable = (_id) => {
+  // panzarotti available status functionality
+  let handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/specialtypastastatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/specialtypastastatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -215,11 +213,11 @@ const SpecialityPastaForm = () => {
   let handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/specialtypastastatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/specialtypastastatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -389,7 +387,7 @@ const SpecialityPastaForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

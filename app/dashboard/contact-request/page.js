@@ -11,7 +11,7 @@ const page = () => {
   let [allContact, setAllContact] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/contact/getcontact")
+      .get("https://jomaasbackendai.onrender.com/api/v1/contact/getcontact")
       .then((res) => {
         setAllContact(res.data);
       });
@@ -21,8 +21,8 @@ const page = () => {
   let handleDelete = (item) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/contact/deletecontact",
-        { id: item._id }
+        "https://jomaasbackendai.onrender.com/api/v1/contact/deletecontact",
+        { id: item._id },
       )
       .then((res) => {
         location.reload();

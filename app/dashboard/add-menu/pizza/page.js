@@ -15,7 +15,7 @@ const { Option } = Select;
 const PizzaForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBracnh] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [pizzaData, setPizzaData] = useState({
@@ -57,8 +57,8 @@ const PizzaForm = () => {
     // Send data to the backend using Axios
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/pizza",
-        pizzaData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/pizza",
+        pizzaData,
       )
       .then((res) => {
         if (res.data.message === "Your Pizza Item Successfully Created!!") {
@@ -93,9 +93,12 @@ const PizzaForm = () => {
   //   delete product function
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletepizza", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletepizza",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -105,7 +108,7 @@ const PizzaForm = () => {
   let [allPizza, setAllPizza] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getpizza")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getpizza")
       .then((res) => {
         setAllPizza(res.data);
       });
@@ -149,8 +152,7 @@ const PizzaForm = () => {
     "SOUR CREAM",
     "BLUE CHEESE",
     "GARLIC BUTTER BASE",
-    "PESTO SAUCE BASE"
-    
+    "PESTO SAUCE BASE",
   ];
 
   //   date format function
@@ -219,10 +221,13 @@ const PizzaForm = () => {
   // update the pizza data from database
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatepizza", {
-        id: editID,
-        updatedPizza: pizzaData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatepizza",
+        {
+          id: editID,
+          updatedPizza: pizzaData,
+        },
+      )
       .then((res) => {
         if (res.data.message === "Your Pizza Item Successfully Updated!!") {
           location.reload();
@@ -256,27 +261,31 @@ const PizzaForm = () => {
 
   // pizza available status functionality
 
-  
-
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/pizzastatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/pizzastatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
-        location.reload()
+        location.reload();
       });
   };
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/pizzastatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/pizzastatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
-        location.reload()
+        location.reload();
       });
   };
 
@@ -374,7 +383,7 @@ const PizzaForm = () => {
               item.branch === branch && (
                 <div className="w-full p-3 md:w-[32%] bg-p-yellow flex flex-col gap-y-3">
                   <img src={item.image} className="w-full h-auto" />
-               
+
                   <h4 className="text-[20px] text-p-red mt-3 font-semibold capitalize ">
                     {item.name}
                   </h4>
@@ -416,11 +425,12 @@ const PizzaForm = () => {
                   </div>
                   <div className="text-end">
                     <small className="font-semibold text-p-brown">
-                     Created: {formatDateTime(item.createdAt)}
-                    </small><br />
+                      Created: {formatDateTime(item.createdAt)}
+                    </small>
+                    <br />
                     <small className="font-semibold text-p-brown">
-                        Last Update: {formatDateTime(item.updatedAt)}
-                      </small>
+                      Last Update: {formatDateTime(item.updatedAt)}
+                    </small>
                   </div>
                   <div className="flex justify-center gap-3 mt-5">
                     {edit && item._id === editID ? (
@@ -463,7 +473,7 @@ const PizzaForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

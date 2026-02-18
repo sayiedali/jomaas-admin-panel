@@ -12,10 +12,9 @@ import { InfinitySpin } from "react-loader-spinner";
 const { Option } = Select;
 
 const BurgerForm = () => {
- 
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [burgerData, setBurgerData] = useState({
@@ -40,8 +39,8 @@ const BurgerForm = () => {
     // Send data to the backend using Axios
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/burger",
-        burgerData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/burger",
+        burgerData,
       )
       .then((res) => {
         if (res.data.message === "Your Burger Item Successfully Created!!") {
@@ -70,10 +69,10 @@ const BurgerForm = () => {
   let handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deleteburger",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deleteburger",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -84,7 +83,7 @@ const BurgerForm = () => {
   let [allBurgers, setAllBurgers] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getburger")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getburger")
       .then((res) => {
         setAllBurgers(res.data);
       });
@@ -104,7 +103,14 @@ const BurgerForm = () => {
   };
 
   // Toppings array
-  const toppings = ["LETUCE", "ONIONS", "TOMATOES","PICKLES","MAYO","KECHUP"]; // Replace with your actual toppings
+  const toppings = [
+    "LETUCE",
+    "ONIONS",
+    "TOMATOES",
+    "PICKLES",
+    "MAYO",
+    "KECHUP",
+  ]; // Replace with your actual toppings
 
   // Edit functionalities
   let [edit, setEdit] = useState(false);
@@ -147,16 +153,14 @@ const BurgerForm = () => {
   let handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updateburger",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updateburger",
         {
           id: editID,
           updatedBurger: burgerData,
-        }
+        },
       )
       .then((res) => {
-        if (
-          res.data.message === "Your Burger Item Successfully Updated!!"
-        ) {
+        if (res.data.message === "Your Burger Item Successfully Updated!!") {
           location.reload();
           toast.success(res.data.message);
           setBurgerData({
@@ -182,11 +186,11 @@ const BurgerForm = () => {
   let handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/burgerstatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/burgerstatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -196,11 +200,11 @@ const BurgerForm = () => {
   let handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/burgerstatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/burgerstatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -356,7 +360,7 @@ const BurgerForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

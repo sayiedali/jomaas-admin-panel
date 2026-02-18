@@ -15,7 +15,7 @@ const { Option } = Select;
 const ChickenForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [chickenData, setChickenData] = useState({
@@ -38,7 +38,10 @@ const ChickenForm = () => {
 
     // Send data to the backend using Axios
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/chickens", chickenData)
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/chickens",
+        chickenData,
+      )
       .then((res) => {
         if (res.data.message === "Your Chicken Item Successfully Created!!") {
           location.reload();
@@ -66,9 +69,12 @@ const ChickenForm = () => {
   // delete chicken function
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletechicken", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletechicken",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -78,7 +84,7 @@ const ChickenForm = () => {
   let [allChicken, setAllChicken] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getchickens")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getchickens")
       .then((res) => {
         setAllChicken(res.data);
       });
@@ -147,10 +153,13 @@ const ChickenForm = () => {
   // update the chicken data from the database
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatechicken", {
-        id: editID,
-        updatedChicken: chickenData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatechicken",
+        {
+          id: editID,
+          updatedChicken: chickenData,
+        },
+      )
       .then((res) => {
         if (res.data.message === "Your Chicken Item Successfully Updated!!") {
           location.reload();
@@ -178,10 +187,13 @@ const ChickenForm = () => {
   // chicken available status functionality
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/chickenstatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/chickenstatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -189,10 +201,13 @@ const ChickenForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/chickenstatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/chickenstatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -203,7 +218,8 @@ const ChickenForm = () => {
       <ToastContainer />
       {editItem ? (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
-          Update your Chicken item - {editItem.pieces} {editItem.name} {editItem.comesWith.length === 0 ? "" : "(Combo)"}
+          Update your Chicken item - {editItem.pieces} {editItem.name}{" "}
+          {editItem.comesWith.length === 0 ? "" : "(Combo)"}
         </h3>
       ) : (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
@@ -225,23 +241,25 @@ const ChickenForm = () => {
         value={chickenData.image}
         onChange={(e) => handleChange(e.target.value, "image")}
       />
-      
-     <div className="">
-      <small className="text-p-red">You can skip Comes with items if you dont want to make combo</small>
-     <Select
-        mode="tags"
-        style={{ width: "100%" }}
-        placeholder="Comes with"
-        onChange={(value) => handleChange(value, "comesWith")}
-        value={chickenData.comesWith}
-      >
-        {comesWith.map((item) => (
-          <Option key={item} value={item}>
-            {item}
-          </Option>
-        ))}
-      </Select>
-     </div>
+
+      <div className="">
+        <small className="text-p-red">
+          You can skip Comes with items if you dont want to make combo
+        </small>
+        <Select
+          mode="tags"
+          style={{ width: "100%" }}
+          placeholder="Comes with"
+          onChange={(value) => handleChange(value, "comesWith")}
+          value={chickenData.comesWith}
+        >
+          {comesWith.map((item) => (
+            <Option key={item} value={item}>
+              {item}
+            </Option>
+          ))}
+        </Select>
+      </div>
       <Input
         placeholder="Pieces"
         type="number"
@@ -281,22 +299,25 @@ const ChickenForm = () => {
                 <div className="w-full p-3 md:w-[32%] bg-p-yellow flex flex-col gap-y-3">
                   <img src={item.image} className="w-full h-auto" />
                   <h4 className="text-[20px] text-p-red font-semibold capitalize ">
-                   {item.pieces} {item.name} {item.comesWith.length === 0 ? "" : "(Combo)"}
+                    {item.pieces} {item.name}{" "}
+                    {item.comesWith.length === 0 ? "" : "(Combo)"}
                   </h4>
                   <p className="text-[12px] text-p-brown">{item.description}</p>
-                 
-                 {item.comesWith.length !== 0 && <div className="">
-                    <h4 className="text-[17px] mb-2 text-p-red font-semibold capitalize ">
-                      Comes With
-                    </h4>
-                    <ul className="flex flex-wrap gap-3">
-                      {item.comesWith.map((item, index) => (
-                        <li className="p-1 rounded-lg text-[10px] text-white bg-green-700">
-                          {item}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>}
+
+                  {item.comesWith.length !== 0 && (
+                    <div className="">
+                      <h4 className="text-[17px] mb-2 text-p-red font-semibold capitalize ">
+                        Comes With
+                      </h4>
+                      <ul className="flex flex-wrap gap-3">
+                        {item.comesWith.map((item, index) => (
+                          <li className="p-1 rounded-lg text-[10px] text-white bg-green-700">
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                   <div className="">
                     <h4 className="text-[17px]  text-p-red font-semibold capitalize ">
                       Prices (CAD)
@@ -355,7 +376,7 @@ const ChickenForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

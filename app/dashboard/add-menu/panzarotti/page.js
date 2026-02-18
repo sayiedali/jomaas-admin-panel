@@ -13,7 +13,7 @@ const { Option } = Select;
 const PanzarottiForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [panzarottiData, setPanzarottiData] = useState({
@@ -36,8 +36,8 @@ const PanzarottiForm = () => {
     // Send data to the backend using Axios
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/panzarotti",
-        panzarottiData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/panzarotti",
+        panzarottiData,
       )
       .then((res) => {
         if (
@@ -68,10 +68,10 @@ const PanzarottiForm = () => {
   let handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletepanzarotti",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletepanzarotti",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -82,7 +82,7 @@ const PanzarottiForm = () => {
   let [allPanzarotti, setAllPanzarotti] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getpanzarotti")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getpanzarotti")
       .then((res) => {
         setAllPanzarotti(res.data);
       });
@@ -102,7 +102,7 @@ const PanzarottiForm = () => {
 
   // comesWith array
   const comesWith = ["MARINARA SAUCE"];
-  
+
   const toppings = [
     "HAM",
     "SALAMI",
@@ -140,8 +140,7 @@ const PanzarottiForm = () => {
     "SOUR CREAM",
     "BLUE CHEESE",
     "GARLIC BUTTER BASE",
-    "PESTO SAUCE BASE"
-    
+    "PESTO SAUCE BASE",
   ];
 
   // edit functionalities
@@ -185,11 +184,11 @@ const PanzarottiForm = () => {
   let handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatepanzarotti",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatepanzarotti",
         {
           id: editID,
           updatedPanzarotti: panzarottiData,
-        }
+        },
       )
       .then((res) => {
         if (
@@ -220,11 +219,11 @@ const PanzarottiForm = () => {
   let handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/panzarottistatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/panzarottistatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -234,11 +233,11 @@ const PanzarottiForm = () => {
   let handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/panzarottistatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/panzarottistatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -250,7 +249,7 @@ const PanzarottiForm = () => {
       <ToastContainer />
       {editItem ? (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
-          Update your Panzarotti item - {editItem.toppings.length } Toppings
+          Update your Panzarotti item - {editItem.toppings.length} Toppings
         </h3>
       ) : (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
@@ -414,7 +413,7 @@ const PanzarottiForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

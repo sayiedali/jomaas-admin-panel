@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
- 
+
 const page = () => {
   let dataUser = useSelector((data) => data.userData.userInfo?.branchName);
 
@@ -20,12 +20,12 @@ const page = () => {
   let [deliveryManDetailId, setDeliveryManDetailId] = useState("");
   let [deliveryManDetailName, setDeliveryManDetailName] = useState("");
   let [deliveryManDetailPhone, setDeliveryManDetailPhone] = useState("");
- 
+
   useEffect(() => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/delivery/getAllDeliveryMan/${dataUser}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/delivery/getAllDeliveryMan/${dataUser}`,
     };
 
     axios
@@ -59,7 +59,7 @@ const page = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://jomaas-backend.onrender.com/api/v1/delivery/createDeliveryMan",
+      url: "https://jomaasbackendai.onrender.com/api/v1/delivery/createDeliveryMan",
       headers: {
         "Content-Type": "application/json",
       },
@@ -81,7 +81,7 @@ const page = () => {
       .catch((error) => {
         console.log(error);
       });
-  }; 
+  };
 
   // Edit
   const handleEdit = (deliveryManName, deliveryManPhone, info, id) => {
@@ -97,7 +97,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/delivery/deleteDeleveryMan/${id}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/delivery/deleteDeleveryMan/${id}`,
     };
 
     axios
@@ -105,7 +105,7 @@ const page = () => {
       .then((response) => {
         if ("success" in response.data) {
           setDeliveryManDetail((el) =>
-            el.filter((e) => e._id != response.data.data._id)
+            el.filter((e) => e._id != response.data.data._id),
           );
           toast.success(response.data.success);
         } else if ("error" in response.data) {
@@ -128,7 +128,7 @@ const page = () => {
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://jomaas-backend.onrender.com/api/v1/delivery/updateDeliveryMan",
+      url: "https://jomaasbackendai.onrender.com/api/v1/delivery/updateDeliveryMan",
       headers: {
         "Content-Type": "application/json",
       },

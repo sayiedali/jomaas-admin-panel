@@ -41,13 +41,13 @@ const LoginPage = () => {
     setLoader(true);
 
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/auth/login", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/auth/login", {
         branchName: selectedBranch,
         secretKey: secretKey,
       })
       .then((response) => {
         if (response.data.message === "Login successful") {
-          disp(activeUser(response.data.data))
+          disp(activeUser(response.data.data));
           // Set cookie after successful login
           Cookies.set("adminData", JSON.stringify(response.data.data), {
             expires: 7,

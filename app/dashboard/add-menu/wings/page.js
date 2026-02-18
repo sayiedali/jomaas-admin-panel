@@ -12,7 +12,7 @@ const { Option } = Select;
 const WingsForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [wingsData, setWingsData] = useState({
@@ -33,8 +33,8 @@ const WingsForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/wings",
-        wingsData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/wings",
+        wingsData,
       )
       .then((res) => {
         if (res.data.message === "Your Wings Item Successfully Created!!") {
@@ -62,9 +62,12 @@ const WingsForm = () => {
   // delete wings function
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletewings", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletewings",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -74,7 +77,7 @@ const WingsForm = () => {
   let [allWings, setAllWings] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getwings")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getwings")
       .then((res) => {
         setAllWings(res.data);
       });
@@ -134,10 +137,13 @@ const WingsForm = () => {
   // update the wings data from database
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatewings", {
-        id: editID,
-        updatedWings: wingsData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatewings",
+        {
+          id: editID,
+          updatedWings: wingsData,
+        },
+      )
       .then((res) => {
         if (res.data.message === "Your Wings Item Successfully Updated!!") {
           location.reload();
@@ -168,10 +174,13 @@ const WingsForm = () => {
 
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/wingsstatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/wingsstatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -179,10 +188,13 @@ const WingsForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/wingsstatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/wingsstatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -206,8 +218,7 @@ const WingsForm = () => {
       <ToastContainer />
       {editItem ? (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
-          Update your wings item - {editItem.name} {` (${editItem.pieces})`}{" "}
-          Pcs
+          Update your wings item - {editItem.name} {` (${editItem.pieces})`} Pcs
         </h3>
       ) : (
         <h3 className="text-center uppercase font-semibold text-p-brown text-[18px] py-4">
@@ -355,7 +366,7 @@ const WingsForm = () => {
                       )}
                     </div>
                   </div>
-                )
+                ),
             )}
         </div>
       </div>

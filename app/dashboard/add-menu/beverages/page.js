@@ -11,7 +11,7 @@ import { InfinitySpin } from "react-loader-spinner";
 const BeverageForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [beverageData, setBeverageData] = useState({
@@ -27,8 +27,8 @@ const BeverageForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/beverage",
-        beverageData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/beverage",
+        beverageData,
       )
       .then((res) => {
         if (res.data.message === "Your Beverage Item Successfully Created!!") {
@@ -52,10 +52,10 @@ const BeverageForm = () => {
   let handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletebeverage",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletebeverage",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -66,13 +66,13 @@ const BeverageForm = () => {
   let [allBeverages, setAllBeverages] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getbeverage")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getbeverage")
       .then((res) => {
         setAllBeverages(res.data);
       });
   }, []);
- // Date format function
- const formatDateTime = (createdAt) => {
+  // Date format function
+  const formatDateTime = (createdAt) => {
     const options = {
       year: "numeric",
       month: "long",
@@ -117,11 +117,11 @@ const BeverageForm = () => {
   let handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatebeverage",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatebeverage",
         {
           id: editID,
           updatedBeverage: beverageData,
-        }
+        },
       )
       .then((res) => {
         if (res.data.message === "Your Beverage Item Successfully Updated!!") {
@@ -146,11 +146,11 @@ const BeverageForm = () => {
   let handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/beveragestatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/beveragestatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -160,11 +160,11 @@ const BeverageForm = () => {
   let handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/beveragestatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/beveragestatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -265,7 +265,7 @@ const BeverageForm = () => {
                       )}
                     </div>
                   </div>
-                )
+                ),
             )}
         </div>
       </div>

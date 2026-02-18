@@ -15,7 +15,7 @@ const { Option } = Select;
 const DonairForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [donairData, setDonairData] = useState({
@@ -35,8 +35,8 @@ const DonairForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/donair",
-        donairData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/donair",
+        donairData,
       )
       .then((res) => {
         if (res.data.message === "Your Donair Item Successfully Created!!") {
@@ -64,10 +64,10 @@ const DonairForm = () => {
   let handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletedonair",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletedonair",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -78,7 +78,7 @@ const DonairForm = () => {
   let [allDonairs, setAllDonairs] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getdonair")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getdonair")
       .then((res) => {
         setAllDonairs(res.data);
       });
@@ -141,11 +141,11 @@ const DonairForm = () => {
   let handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatedonair",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatedonair",
         {
           id: editID,
           updatedDonair: donairData,
-        }
+        },
       )
       .then((res) => {
         if (res.data.message === "Your Donair Item Successfully Updated!!") {
@@ -175,10 +175,13 @@ const DonairForm = () => {
 
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/donairstatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/donairstatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -186,10 +189,13 @@ const DonairForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/donairstatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/donairstatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -265,7 +271,7 @@ const DonairForm = () => {
                 item.branch === branch && (
                   <div className="w-full p-3 md:w-[32%] bg-p-yellow flex flex-col gap-y-3">
                     <img src={item.image} className="w-full h-auto" />
-                    
+
                     <h4 className="text-[20px] mt-3 text-p-red font-semibold capitalize ">
                       {item.name}
                     </h4>
@@ -291,10 +297,11 @@ const DonairForm = () => {
                       <p className="text-p-brown">{item.prices}</p>
                     </div>
                     <div className="text-end">
-                    <small className="font-semibold text-p-brown">
-                     Created: {formatDateTime(item.createdAt)}
-                    </small><br />
-                    <small className="font-semibold text-p-brown">
+                      <small className="font-semibold text-p-brown">
+                        Created: {formatDateTime(item.createdAt)}
+                      </small>
+                      <br />
+                      <small className="font-semibold text-p-brown">
                         Last Update: {formatDateTime(item.updatedAt)}
                       </small>
                     </div>
@@ -339,7 +346,7 @@ const DonairForm = () => {
                       )}
                     </div>
                   </div>
-                )
+                ),
             )}
         </div>
       </div>

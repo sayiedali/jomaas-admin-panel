@@ -17,7 +17,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/now-pending-order/${data?.branchName}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/now-pending-order/${data?.branchName}`,
     };
 
     axios
@@ -36,7 +36,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/later-pending-order/${data?.branchName}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/later-pending-order/${data?.branchName}`,
     };
 
     axios
@@ -55,7 +55,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/accept-order/${data?.branchName}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/accept-order/${data?.branchName}`,
     };
 
     axios
@@ -74,7 +74,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/reject-order/${data?.branchName}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/reject-order/${data?.branchName}`,
     };
 
     axios
@@ -93,7 +93,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/alluser`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/alluser`,
     };
 
     axios
@@ -112,7 +112,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/dashboard/blockuser`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/dashboard/blockuser`,
     };
 
     axios
@@ -188,14 +188,14 @@ const page = () => {
                       (accumulator, currentValue) =>
                         accumulator +
                         Number(currentValue.orderPrice.split("$")[1]),
-                      initialValue
+                      initialValue,
                     ) -
                       acceptOrder.reduce(
                         (accumulator, currentValue) =>
                           accumulator +
                           Number(currentValue.orderPriceTax.split("$")[1]),
-                        initialValue
-                      )
+                        initialValue,
+                      ),
                   ).toFixed(2)}`
                 : "$00.00"}
             </h3>
@@ -211,8 +211,8 @@ const page = () => {
                       (accumulator, currentValue) =>
                         accumulator +
                         Number(currentValue.orderPriceTax.split("$")[1]),
-                      initialValue
-                    )
+                      initialValue,
+                    ),
                   ).toFixed(2)}`
                 : "$00.00"}
             </h3>

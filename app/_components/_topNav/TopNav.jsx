@@ -14,22 +14,22 @@ const TopNav = () => {
   let data = useSelector((state) => state);
   let disp = useDispatch();
   let router = useRouter();
-  
+
   const [shopToggle, setShopToggle] = useState(false);
-  
+
   let handlelogout = () => {
     Cookies.remove("adminData");
     disp(activeUser(null));
     router.push("/");
   };
 
-  const handleShopToggle = (data) => { 
+  const handleShopToggle = (data) => {
     setShopToggle(data);
-      
+
     let config = {
       method: "post",
       maxBodyLength: Infinity,
-      url: "https://jomaas-backend.onrender.com/api/v1/jomaas/shop/toggle",
+      url: "https://jomaasbackendai.onrender.com/api/v1/jomaas/shop/toggle",
       headers: {
         "Content-Type": "application/json",
       },
@@ -45,27 +45,26 @@ const TopNav = () => {
       .then((response) => {
         if ("success" in response.data) {
           setShopToggle(response?.data?.success);
-          
-          if(response?.data?.success){
-            toast.success('Shop is now On');
-          }else {
-            toast.success('Shop is now Off');
+
+          if (response?.data?.success) {
+            toast.success("Shop is now On");
+          } else {
+            toast.success("Shop is now Off");
           }
-          
         } else {
           setShopToggle(!data);
         }
       })
       .catch((error) => {
         console.log(error);
-      });    
-  }
-  
+      });
+  };
+
   useEffect(() => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: "https://jomaas-backend.onrender.com/api/v1/jomaas/shop/status",
+      url: "https://jomaasbackendai.onrender.com/api/v1/jomaas/shop/status",
       headers: {
         "Content-Type": "application/json",
       },
@@ -80,17 +79,20 @@ const TopNav = () => {
       })
       .catch((error) => {
         // console.log(error);
-      }); 
+      });
   }, []);
 
-  
   return (
     <div className="fixed py-[20px] px-[10px] shadow-lg bg-p-yellow w-full flex items-center z-[9999] justify-end top-0 right-0">
       <ToastContainer position="top-center" autoClose={2000} />
 
       <div className="flex items-center gap-2 px-3 py-1 mr-5 font-semibold border text-p-red rounded-3xl">
         Turn on your shop
-        <Switch checked={shopToggle} className="!bg-[#d1d1d1] shadow-inner" onChange={(tf) => handleShopToggle(tf)} />
+        <Switch
+          checked={shopToggle}
+          className="!bg-[#d1d1d1] shadow-inner"
+          onChange={(tf) => handleShopToggle(tf)}
+        />
       </div>
       <div className="flex items-center gap-x-3">
         <span className="font-semibold text-p-brown">
@@ -108,4 +110,3 @@ const TopNav = () => {
 };
 
 export default TopNav;
-

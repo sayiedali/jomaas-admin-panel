@@ -15,10 +15,17 @@ const { Option } = Select;
 const SubForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
-  const toppings = ["MAYO", "MUSTARD","SWEET SAUCE","GARLIC","SOUR CREAM","TZATZIKI"];
+  const toppings = [
+    "MAYO",
+    "MUSTARD",
+    "SWEET SAUCE",
+    "GARLIC",
+    "SOUR CREAM",
+    "TZATZIKI",
+  ];
   const servedWith = [
     "SALAMI",
     "CHEESE",
@@ -53,7 +60,7 @@ const SubForm = () => {
 
     // Send data to the backend using Axios
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/sub", subData)
+      .post("https://jomaasbackendai.onrender.com/api/v1/add-menu/sub", subData)
       .then((res) => {
         if (res.data.message === "Your Sub Item Successfully Created!!") {
           location.reload();
@@ -81,15 +88,19 @@ const SubForm = () => {
   // Read sub items
   let [allSubs, setAllSubs] = useState([]);
   useEffect(() => {
-    axios.get("https://jomaas-backend.onrender.com/api/v1/add-menu/getsubs").then((res) => {
-      setAllSubs(res.data);
-    });
+    axios
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getsubs")
+      .then((res) => {
+        setAllSubs(res.data);
+      });
   }, []);
 
   // Delete sub item
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletesub", { id: _id })
+      .post("https://jomaasbackendai.onrender.com/api/v1/add-menu/deletesub", {
+        id: _id,
+      })
       .then(() => {
         location.reload();
       });
@@ -137,7 +148,7 @@ const SubForm = () => {
   // Update the sub data from the database
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatesub", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/add-menu/updatesub", {
         id: editID,
         updatedSub: subData,
       })
@@ -180,7 +191,7 @@ const SubForm = () => {
   // Sub available status functionality
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/substatus", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/add-menu/substatus", {
         id: _id,
         status: "not-available",
       })
@@ -191,7 +202,7 @@ const SubForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/substatus", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/add-menu/substatus", {
         id: _id,
         status: "available",
       })
@@ -241,20 +252,23 @@ const SubForm = () => {
         ))}
       </Select>
       <div className="">
-      <small className="text-p-red">You can skip Topped With items if you dont want to serve anything on top of your sub.</small>
-      <Select
-        mode="tags"
-        style={{ width: "100%" }}
-        placeholder="Topped With"
-        onChange={(value) => handleChange(value, "toppings")}
-        value={subData.toppings}
-      >
-        {toppings.map((item) => (
-          <Option key={item} value={item}>
-            {item}
-          </Option>
-        ))}
-      </Select>
+        <small className="text-p-red">
+          You can skip Topped With items if you dont want to serve anything on
+          top of your sub.
+        </small>
+        <Select
+          mode="tags"
+          style={{ width: "100%" }}
+          placeholder="Topped With"
+          onChange={(value) => handleChange(value, "toppings")}
+          value={subData.toppings}
+        >
+          {toppings.map((item) => (
+            <Option key={item} value={item}>
+              {item}
+            </Option>
+          ))}
+        </Select>
       </div>
       <Input
         placeholder="Prices (CAD)"
@@ -324,10 +338,7 @@ const SubForm = () => {
                       Prices (CAD)
                     </h4>
                     <ul>
-                      <li className="text-p-brown">
-                        
-                        {item.prices}
-                      </li>
+                      <li className="text-p-brown">{item.prices}</li>
                     </ul>
                   </div>
                   <div className="text-end">
@@ -380,7 +391,7 @@ const SubForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

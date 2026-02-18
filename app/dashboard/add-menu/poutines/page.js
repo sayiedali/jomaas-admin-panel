@@ -11,7 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 const PoutineForm = () => {
   const data = useSelector((state) => state);
   const [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   const [updateButton, setUpdateButton] = useState(false);
   const [poutineData, setPoutineData] = useState({
@@ -44,8 +44,8 @@ const PoutineForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/poutines",
-        poutineData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/poutines",
+        poutineData,
       )
       .then((res) => {
         if (res.data.message === "Your Poutine Item Successfully Created!!") {
@@ -75,10 +75,10 @@ const PoutineForm = () => {
   const handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletepoutine",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletepoutine",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -89,7 +89,7 @@ const PoutineForm = () => {
   const [allPoutines, setAllPoutines] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getpoutines")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getpoutines")
       .then((res) => {
         setAllPoutines(res.data);
       });
@@ -153,11 +153,11 @@ const PoutineForm = () => {
   const handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatepoutine",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatepoutine",
         {
           id: editID,
           updatedPoutine: poutineData,
-        }
+        },
       )
       .then((res) => {
         if (res.data.message === "Your Poutine Item Successfully Updated!!") {
@@ -189,11 +189,11 @@ const PoutineForm = () => {
   const handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/poutinestatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/poutinestatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -203,11 +203,11 @@ const PoutineForm = () => {
   const handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/poutinestatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/poutinestatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -353,7 +353,7 @@ const PoutineForm = () => {
                       )}
                     </div>
                   </div>
-                )
+                ),
             )}
         </div>
       </div>

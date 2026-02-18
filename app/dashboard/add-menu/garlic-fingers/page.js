@@ -13,7 +13,7 @@ const { Option } = Select;
 const GarlicFingersForm = () => {
   let data = useSelector((state) => state);
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   let [updateButton, setUpdateButton] = useState(false);
   const [garlicFingersData, setGarlicFingersData] = useState({
@@ -28,7 +28,7 @@ const GarlicFingersForm = () => {
     },
     branch: data.userData.userInfo && data.userData.userInfo.branchName,
   });
-  const comesWith = ["MARINARA SAUCE","SWEET SAUCE"];
+  const comesWith = ["MARINARA SAUCE", "SWEET SAUCE"];
   const handleChange = (value, field) => {
     setUpdateButton(true);
     setGarlicFingersData({ ...garlicFingersData, [field]: value });
@@ -48,11 +48,13 @@ const GarlicFingersForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/garlicfingers",
-        garlicFingersData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/garlicfingers",
+        garlicFingersData,
       )
       .then((res) => {
-        if (res.data.message === "Your Garlic Fingers Item Successfully Created!") {
+        if (
+          res.data.message === "Your Garlic Fingers Item Successfully Created!"
+        ) {
           location.reload();
           toast.success(res.data.message);
           setGarlicFingersData({
@@ -79,9 +81,12 @@ const GarlicFingersForm = () => {
 
   let handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletegarlicfingers", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletegarlicfingers",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -90,7 +95,9 @@ const GarlicFingersForm = () => {
   let [allGarlicFingers, setAllGarlicFingers] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getgarlicfingers")
+      .get(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/getgarlicfingers",
+      )
       .then((res) => {
         setAllGarlicFingers(res.data);
       });
@@ -154,12 +161,17 @@ const GarlicFingersForm = () => {
 
   let handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updategarlicfingers", {
-        id: editID,
-        updatedGarlicFingers: garlicFingersData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updategarlicfingers",
+        {
+          id: editID,
+          updatedGarlicFingers: garlicFingersData,
+        },
+      )
       .then((res) => {
-        if (res.data.message === "Your Garlic Fingers Item Successfully Updated!") {
+        if (
+          res.data.message === "Your Garlic Fingers Item Successfully Updated!"
+        ) {
           location.reload();
           toast.success(res.data.message);
           setGarlicFingersData({
@@ -186,10 +198,13 @@ const GarlicFingersForm = () => {
 
   let handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/garlicfingersstatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/garlicfingersstatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -197,10 +212,13 @@ const GarlicFingersForm = () => {
 
   let handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/garlicfingersstatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/garlicfingersstatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         location.reload();
       });
@@ -338,7 +356,8 @@ const GarlicFingersForm = () => {
                   <div className="text-end">
                     <small className="font-semibold text-p-brown">
                       Created: {formatDateTime(item.createdAt)}
-                    </small><br />
+                    </small>
+                    <br />
                     <small className="font-semibold text-p-brown">
                       Last Update: {formatDateTime(item.updatedAt)}
                     </small>
@@ -384,7 +403,7 @@ const GarlicFingersForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>

@@ -8,10 +8,10 @@ import axios from "axios";
 
 const page = () => {
   const [allUser, setAllUser] = useState([]);
- 
+
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/auth/allusers")
+      .get("https://jomaasbackendai.onrender.com/api/v1/auth/allusers")
       .then((res) => setAllUser(res.data));
   }, []);
 
@@ -31,7 +31,7 @@ const page = () => {
   //   user block unblock
   let userBlock = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/auth/userblocking", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/auth/userblocking", {
         id: _id,
         blocking: "block",
       })
@@ -42,7 +42,7 @@ const page = () => {
   };
   let userUnBlock = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/auth/userblocking", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/auth/userblocking", {
         id: _id,
         blocking: "unblock",
       })
@@ -54,7 +54,7 @@ const page = () => {
   //   user delete
   let deleteUser = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/auth/deleteuser", {
+      .post("https://jomaasbackendai.onrender.com/api/v1/auth/deleteuser", {
         id: _id,
       })
       .then((res) => {

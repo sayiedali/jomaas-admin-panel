@@ -16,7 +16,7 @@ const page = () => {
   let data = useSelector((state) => state);
   const [invoiceData, setInvoiceData] = useState();
   let [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
 
   // [play tone functionality]
@@ -92,7 +92,7 @@ const page = () => {
 
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/order/alllaterorder")
+      .get("https://jomaasbackendai.onrender.com/api/v1/order/alllaterorder")
       .then((res) => {
         setPendingOrderData(res.data.data);
       });
@@ -104,7 +104,7 @@ const page = () => {
     let config = {
       method: "get",
       maxBodyLength: Infinity,
-      url: `https://jomaas-backend.onrender.com/api/v1/delivery/getAllDeliveryMan/${dataUser}`,
+      url: `https://jomaasbackendai.onrender.com/api/v1/delivery/getAllDeliveryMan/${dataUser}`,
     };
 
     axios
@@ -291,13 +291,15 @@ const page = () => {
                           </span>
                         </p>
 
-                        {
-                          item.paymentId && item.payment == "Online Payment" && <p className="px-3 py-2 font-semibold bg-gray-600 rounded-md ">
-                          <span className="text-white">
-                            Payment ID : {item.payment === "Online Payment" && item.paymentId }
-                          </span>
-                        </p>
-                        }
+                        {item.paymentId && item.payment == "Online Payment" && (
+                          <p className="px-3 py-2 font-semibold bg-gray-600 rounded-md ">
+                            <span className="text-white">
+                              Payment ID :{" "}
+                              {item.payment === "Online Payment" &&
+                                item.paymentId}
+                            </span>
+                          </p>
+                        )}
 
                         <p className="px-3 py-2 font-semibold rounded-md bg-sky-600">
                           <span className="text-white">
@@ -455,7 +457,7 @@ const page = () => {
                       </button>
                     </div>
                   </div>
-                )
+                ),
             )}
           {/* order details modal start */}
           {showOrderDetail && (
@@ -554,7 +556,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -562,7 +564,7 @@ const page = () => {
                                               <small className="text-[10px] text-p-blue">
                                                 $
                                                 {parseFloat(
-                                                  item.infoPizza.pizzaSizeData
+                                                  item.infoPizza.pizzaSizeData,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -594,7 +596,7 @@ const page = () => {
                                                     <PiCircleHalfFill className="rotate-[-180deg] text-[18px] text-[#15803d] " />
                                                   )}
                                                 </li>
-                                              )
+                                              ),
                                             )}
                                           </ul>
                                         </div>
@@ -614,7 +616,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -637,7 +639,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -690,7 +692,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -726,8 +728,8 @@ const page = () => {
                                                               el.count == 1
                                                                 ? "text-[#185316]"
                                                                 : el.count == 2
-                                                                ? "text-[#4f46e5]"
-                                                                : ""
+                                                                  ? "text-[#4f46e5]"
+                                                                  : ""
                                                             }`}
                                                           />
                                                         ) : el.position ==
@@ -737,8 +739,8 @@ const page = () => {
                                                               el.count == 1
                                                                 ? "text-[#185316]"
                                                                 : el.count == 2
-                                                                ? "text-[#4f46e5]"
-                                                                : ""
+                                                                  ? "text-[#4f46e5]"
+                                                                  : ""
                                                             }`}
                                                           />
                                                         ) : el.position ==
@@ -748,8 +750,8 @@ const page = () => {
                                                               el.count == 1
                                                                 ? "text-[#185316]"
                                                                 : el.count == 2
-                                                                ? "text-[#4f46e5]"
-                                                                : ""
+                                                                  ? "text-[#4f46e5]"
+                                                                  : ""
                                                             }`}
                                                           />
                                                         ) : (
@@ -760,11 +762,11 @@ const page = () => {
                                                         {el.count == 2 && "2x"}{" "}
                                                         +$
                                                         {parseFloat(
-                                                          el.price
+                                                          el.price,
                                                         ).toFixed(2)}
                                                       </small>
                                                     </li>
-                                                  )
+                                                  ),
                                               )}
                                             </ul>
                                           </div>
@@ -818,8 +820,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -853,7 +855,7 @@ const page = () => {
                                                     {sauceName}
                                                   </small>
                                                 </li>
-                                              )
+                                              ),
                                             )}
                                           </ul>
                                         </div>
@@ -879,7 +881,7 @@ const page = () => {
                                                 +$
                                                 {parseFloat(
                                                   item.infoDonair.makeCombo
-                                                    .price
+                                                    .price,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -953,8 +955,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -988,7 +990,7 @@ const page = () => {
                                                     {tossedName}
                                                   </small>
                                                 </li>
-                                              )
+                                              ),
                                             )}
                                           </ul>
                                         </div>
@@ -1041,8 +1043,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1081,7 +1083,7 @@ const page = () => {
                                                 $
                                                 {parseFloat(
                                                   item.infoPoutine.poutineSize
-                                                    .price
+                                                    .price,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -1092,7 +1094,7 @@ const page = () => {
 
                                         {/* extra cheese & meat option start */}
                                         {item.infoPoutine.cheeseOption.find(
-                                          (el) => el.cheeseName != ""
+                                          (el) => el.cheeseName != "",
                                         ) && (
                                           <>
                                             <div className="">
@@ -1113,11 +1115,11 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           +$
                                                           {parseFloat(
-                                                            extraCheese.price
+                                                            extraCheese.price,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -1144,7 +1146,7 @@ const page = () => {
                                                         +$1.00
                                                       </small>
                                                     </li>
-                                                  )
+                                                  ),
                                                 )}
                                               </ul>
                                             </div>
@@ -1198,8 +1200,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1284,8 +1286,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1324,7 +1326,7 @@ const page = () => {
                                                       : el}
                                                   </small>
                                                 </li>
-                                              )
+                                              ),
                                             )}
                                           </ul>
                                         </div>
@@ -1355,11 +1357,11 @@ const page = () => {
                                                       <small className="text-[10px] text-p-blue">
                                                         +$
                                                         {parseFloat(
-                                                          el.price
+                                                          el.price,
                                                         ).toFixed(2)}
                                                       </small>
                                                     </li>
-                                                  )
+                                                  ),
                                                 )}
                                               </ul>
                                             </div>
@@ -1413,8 +1415,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1452,7 +1454,7 @@ const page = () => {
                                                 +$
                                                 {parseFloat(
                                                   item.infoGarlic.garlicOption
-                                                    .price
+                                                    .price,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -1480,7 +1482,7 @@ const page = () => {
                                                     +$
                                                     {parseFloat(
                                                       item.infoGarlic.bacon
-                                                        .price
+                                                        .price,
                                                     ).toFixed(2)}
                                                   </small>
                                                 </li>
@@ -1537,8 +1539,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1602,7 +1604,7 @@ const page = () => {
                                                     +$
                                                     {parseFloat(
                                                       item.infoBurger.makeCombo
-                                                        .price
+                                                        .price,
                                                     ).toFixed(2)}
                                                   </small>
                                                 </li>
@@ -1679,8 +1681,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1722,7 +1724,7 @@ const page = () => {
                                                       +$
                                                       {parseFloat(
                                                         item.infoSalad.saladSize
-                                                          .price
+                                                          .price,
                                                       ).toFixed(2)}
                                                     </small>
                                                   </li>
@@ -1778,11 +1780,11 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           +$
                                                           {parseFloat(
-                                                            el.extraPrice
+                                                            el.extraPrice,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -1835,8 +1837,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -1870,7 +1872,8 @@ const page = () => {
                                               <small className="text-[10px] text-p-blue">
                                                 $
                                                 {parseFloat(
-                                                  item.infoPasta.pastaSize.price
+                                                  item.infoPasta.pastaSize
+                                                    .price,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -1881,7 +1884,7 @@ const page = () => {
 
                                         {item.infoPasta.extraOption
                                           .map((el) =>
-                                            el.optionCheck ? true : false
+                                            el.optionCheck ? true : false,
                                           )
                                           .includes(true) && (
                                           <>
@@ -1905,11 +1908,11 @@ const page = () => {
                                                           +$
                                                           {parseFloat(
                                                             el.optionValue *
-                                                              el.optionQuantity
+                                                              el.optionQuantity,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -1963,8 +1966,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2003,7 +2006,7 @@ const page = () => {
                                                           {el.sauceName}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -2032,11 +2035,11 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           +$
                                                           {parseFloat(
-                                                            el.extraPrice
+                                                            el.extraPrice,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -2062,7 +2065,7 @@ const page = () => {
                                                         +$1.00
                                                       </small>
                                                     </li>
-                                                  )
+                                                  ),
                                                 )}
                                               </ul>
                                             </div>
@@ -2112,8 +2115,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2155,7 +2158,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -2165,7 +2168,7 @@ const page = () => {
                                                           {parseFloat(
                                                             item
                                                               .infoTwoForOnePizza[0]
-                                                              .pizzaSize.price
+                                                              .pizzaSize.price,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
@@ -2203,7 +2206,7 @@ const page = () => {
                                                           <PiCircleHalfFill className="rotate-[-180deg] text-[18px] text-[#15803d] " />
                                                         )}
                                                       </li>
-                                                    )
+                                                    ),
                                                   )}
                                                 </ul>
                                               </div>
@@ -2225,7 +2228,7 @@ const page = () => {
                                                         .map(
                                                           (el) =>
                                                             el[0].toUpperCase() +
-                                                            el.slice(1)
+                                                            el.slice(1),
                                                         )
                                                         .join(" ")}
                                                     </small>
@@ -2250,7 +2253,7 @@ const page = () => {
                                                         .map(
                                                           (el) =>
                                                             el[0].toUpperCase() +
-                                                            el.slice(1)
+                                                            el.slice(1),
                                                         )
                                                         .join(" ")}
                                                     </small>
@@ -2282,7 +2285,7 @@ const page = () => {
                                                         .map(
                                                           (el) =>
                                                             el[0].toUpperCase() +
-                                                            el.slice(1)
+                                                            el.slice(1),
                                                         )
                                                         .join(" ")}
                                                     </small>
@@ -2322,9 +2325,9 @@ const page = () => {
                                                                     1
                                                                       ? "text-[#185316]"
                                                                       : el.count ==
-                                                                        2
-                                                                      ? "text-[#4f46e5]"
-                                                                      : ""
+                                                                          2
+                                                                        ? "text-[#4f46e5]"
+                                                                        : ""
                                                                   }`}
                                                                 />
                                                               ) : el.position ==
@@ -2335,9 +2338,9 @@ const page = () => {
                                                                     1
                                                                       ? "text-[#185316]"
                                                                       : el.count ==
-                                                                        2
-                                                                      ? "text-[#4f46e5]"
-                                                                      : ""
+                                                                          2
+                                                                        ? "text-[#4f46e5]"
+                                                                        : ""
                                                                   }`}
                                                                 />
                                                               ) : el.position ==
@@ -2348,9 +2351,9 @@ const page = () => {
                                                                     1
                                                                       ? "text-[#185316]"
                                                                       : el.count ==
-                                                                        2
-                                                                      ? "text-[#4f46e5]"
-                                                                      : ""
+                                                                          2
+                                                                        ? "text-[#4f46e5]"
+                                                                        : ""
                                                                   }`}
                                                                 />
                                                               ) : (
@@ -2362,11 +2365,11 @@ const page = () => {
                                                                 "2x"}{" "}
                                                               +$
                                                               {parseFloat(
-                                                                el.price
+                                                                el.price,
                                                               ).toFixed(2)}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                     )}
                                                   </ul>
                                                 </div>
@@ -2374,7 +2377,7 @@ const page = () => {
                                               {/* extra topping end */}
                                               <hr />
                                             </>
-                                          )
+                                          ),
                                         )}
                                         {/* special instruction start */}
                                         {item.infoTwoForOnePizza[0]
@@ -2423,8 +2426,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2490,8 +2493,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2557,8 +2560,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2624,8 +2627,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2691,8 +2694,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2759,8 +2762,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2784,7 +2787,7 @@ const page = () => {
                                         {typeof item.sidesInfo.prices ===
                                           "object" &&
                                           item.sidesInfo.prices.hasOwnProperty(
-                                            "medium"
+                                            "medium",
                                           ) && (
                                             <>
                                               <div className="">
@@ -2799,7 +2802,7 @@ const page = () => {
                                                         .map(
                                                           (el) =>
                                                             el[0].toUpperCase() +
-                                                            el.slice(1)
+                                                            el.slice(1),
                                                         )
                                                         .join(" ")}
                                                     </small>
@@ -2807,7 +2810,8 @@ const page = () => {
                                                     <small className="text-[10px] text-p-blue">
                                                       $
                                                       {parseFloat(
-                                                        item.infoSides.sidePrice
+                                                        item.infoSides
+                                                          .sidePrice,
                                                       ).toFixed(2)}
                                                     </small>
                                                   </li>
@@ -2862,8 +2866,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -2925,7 +2929,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -2949,7 +2953,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -2975,7 +2979,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3033,7 +3037,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3073,9 +3077,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3086,9 +3090,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3099,9 +3103,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -3113,11 +3117,11 @@ const page = () => {
                                                                     2 && "2x"}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -3126,7 +3130,7 @@ const page = () => {
                                                   </>
                                                 )}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* drinks option start */}
@@ -3175,8 +3179,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -3238,7 +3242,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -3262,7 +3266,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3288,7 +3292,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3346,7 +3350,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3386,9 +3390,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3399,9 +3403,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3412,9 +3416,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -3427,11 +3431,11 @@ const page = () => {
                                                                     "2x"}{" "}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -3440,7 +3444,7 @@ const page = () => {
                                                   </>
                                                 )}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* drinks option start */}
@@ -3489,8 +3493,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -3544,7 +3548,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -3569,7 +3573,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3596,7 +3600,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3628,7 +3632,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3668,9 +3672,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3681,9 +3685,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -3694,9 +3698,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -3709,11 +3713,11 @@ const page = () => {
                                                                     "2x"}{" "}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -3722,7 +3726,7 @@ const page = () => {
                                                   </>
                                                 )}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* Tossed option start */}
@@ -3822,8 +3826,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -3877,7 +3881,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -3902,7 +3906,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3929,7 +3933,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -3961,7 +3965,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4001,9 +4005,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4014,9 +4018,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4027,9 +4031,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -4042,11 +4046,11 @@ const page = () => {
                                                                     "2x"}{" "}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -4055,7 +4059,7 @@ const page = () => {
                                                   </>
                                                 )}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* Tossed option start */}
@@ -4152,8 +4156,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -4196,7 +4200,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -4220,7 +4224,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4246,7 +4250,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4277,7 +4281,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4317,9 +4321,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4330,9 +4334,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4343,9 +4347,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -4358,11 +4362,11 @@ const page = () => {
                                                                     "2x"}{" "}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -4371,7 +4375,7 @@ const page = () => {
                                                   </>
                                                 )}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* Tossed option start */}
@@ -4468,8 +4472,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -4512,7 +4516,7 @@ const page = () => {
                                                               {el}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -4536,7 +4540,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4562,7 +4566,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4593,7 +4597,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -4633,9 +4637,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4646,9 +4650,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : el.position ==
@@ -4659,9 +4663,9 @@ const page = () => {
                                                                         1
                                                                           ? "text-[#185316]"
                                                                           : el.count ==
-                                                                            2
-                                                                          ? "text-[#4f46e5]"
-                                                                          : ""
+                                                                              2
+                                                                            ? "text-[#4f46e5]"
+                                                                            : ""
                                                                       }`}
                                                                     />
                                                                   ) : (
@@ -4674,11 +4678,11 @@ const page = () => {
                                                                     "2x"}{" "}
                                                                   +$
                                                                   {parseFloat(
-                                                                    el.price
+                                                                    el.price,
                                                                   ).toFixed(2)}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                         )}
                                                       </ul>
                                                     </div>
@@ -4704,7 +4708,7 @@ const page = () => {
                                                                 el.title}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -4729,7 +4733,7 @@ const page = () => {
                                                                 el.title}
                                                             </small>
                                                           </li>
-                                                        )
+                                                        ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -4738,7 +4742,7 @@ const page = () => {
                                               )}
                                               {/* Default Toppings end */}
                                             </>
-                                          )
+                                          ),
                                         )}
 
                                         {/* Tossed option start */}
@@ -4834,8 +4838,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -4900,8 +4904,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -4935,7 +4939,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -4944,7 +4948,7 @@ const page = () => {
                                                 $
                                                 {parseFloat(
                                                   item.infoCustomSingle
-                                                    .pizzaSizeData
+                                                    .pizzaSizeData,
                                                 ).toFixed(2)}
                                               </small>
                                             </li>
@@ -4980,9 +4984,9 @@ const page = () => {
                                                                 el.count == 1
                                                                   ? "text-[#185316]"
                                                                   : el.count ==
-                                                                    2
-                                                                  ? "text-[#4f46e5]"
-                                                                  : ""
+                                                                      2
+                                                                    ? "text-[#4f46e5]"
+                                                                    : ""
                                                               }`}
                                                             />
                                                           ) : el.position ==
@@ -4992,9 +4996,9 @@ const page = () => {
                                                                 el.count == 1
                                                                   ? "text-[#185316]"
                                                                   : el.count ==
-                                                                    2
-                                                                  ? "text-[#4f46e5]"
-                                                                  : ""
+                                                                      2
+                                                                    ? "text-[#4f46e5]"
+                                                                    : ""
                                                               }`}
                                                             />
                                                           ) : el.position ==
@@ -5004,9 +5008,9 @@ const page = () => {
                                                                 el.count == 1
                                                                   ? "text-[#185316]"
                                                                   : el.count ==
-                                                                    2
-                                                                  ? "text-[#4f46e5]"
-                                                                  : ""
+                                                                      2
+                                                                    ? "text-[#4f46e5]"
+                                                                    : ""
                                                               }`}
                                                             />
                                                           ) : (
@@ -5018,11 +5022,11 @@ const page = () => {
                                                             "2x"}{" "}
                                                           +$
                                                           {parseFloat(
-                                                            el.price
+                                                            el.price,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
-                                                    )
+                                                    ),
                                                 )}
                                               </ul>
                                             </div>
@@ -5044,7 +5048,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -5067,7 +5071,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -5122,7 +5126,7 @@ const page = () => {
                                                   .map(
                                                     (el) =>
                                                       el[0].toUpperCase() +
-                                                      el.slice(1)
+                                                      el.slice(1),
                                                   )
                                                   .join(" ")}
                                               </small>
@@ -5178,8 +5182,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -5233,7 +5237,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5241,7 +5245,7 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           $
                                                           {parseFloat(
-                                                            pizzaObj.pizzaSizeData
+                                                            pizzaObj.pizzaSizeData,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
@@ -5278,9 +5282,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5291,9 +5295,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5304,9 +5308,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -5319,11 +5323,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -5355,9 +5359,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5368,9 +5372,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5381,9 +5385,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -5396,11 +5400,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -5425,7 +5429,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5450,7 +5454,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5479,7 +5483,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5509,7 +5513,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5569,7 +5573,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5594,7 +5598,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5608,7 +5612,7 @@ const page = () => {
                                                 ""
                                               )}
                                             </>
-                                          )
+                                          ),
                                         )}
                                         {/* special instruction start */}
                                         {item.infoCustomTwoForOne[0]
@@ -5657,8 +5661,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -5712,7 +5716,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5720,7 +5724,7 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           $
                                                           {parseFloat(
-                                                            pizzaObj.pizzaSizeData
+                                                            pizzaObj.pizzaSizeData,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
@@ -5748,7 +5752,7 @@ const page = () => {
                                                                   {el}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                           )}
                                                         </ul>
                                                       </div>
@@ -5773,7 +5777,7 @@ const page = () => {
                                                                   {el}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                           )}
                                                         </ul>
                                                       </div>
@@ -5811,9 +5815,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5824,9 +5828,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5837,9 +5841,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -5852,11 +5856,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -5888,9 +5892,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5901,9 +5905,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -5914,9 +5918,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -5929,11 +5933,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -5958,7 +5962,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -5983,7 +5987,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6012,7 +6016,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6042,7 +6046,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6102,7 +6106,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6127,7 +6131,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6141,7 +6145,7 @@ const page = () => {
                                                 ""
                                               )}
                                             </>
-                                          )
+                                          ),
                                         )}
                                         {/* special instruction start */}
                                         {item.infoCustomTwoTopping[0]
@@ -6190,8 +6194,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -6247,7 +6251,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6255,7 +6259,7 @@ const page = () => {
                                                         <small className="text-[10px] text-p-blue">
                                                           $
                                                           {parseFloat(
-                                                            pizzaObj.pizzaSizeData
+                                                            pizzaObj.pizzaSizeData,
                                                           ).toFixed(2)}
                                                         </small>
                                                       </li>
@@ -6283,7 +6287,7 @@ const page = () => {
                                                                   {el}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                           )}
                                                         </ul>
                                                       </div>
@@ -6308,7 +6312,7 @@ const page = () => {
                                                                   {el}
                                                                 </small>
                                                               </li>
-                                                            )
+                                                            ),
                                                           )}
                                                         </ul>
                                                       </div>
@@ -6346,9 +6350,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -6359,9 +6363,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -6372,9 +6376,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -6387,11 +6391,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -6423,9 +6427,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -6436,9 +6440,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : el.position ==
@@ -6449,9 +6453,9 @@ const page = () => {
                                                                       1
                                                                         ? "text-[#185316]"
                                                                         : el.count ==
-                                                                          2
-                                                                        ? "text-[#4f46e5]"
-                                                                        : ""
+                                                                            2
+                                                                          ? "text-[#4f46e5]"
+                                                                          : ""
                                                                     }`}
                                                                   />
                                                                 ) : (
@@ -6464,11 +6468,11 @@ const page = () => {
                                                                   "2x"}{" "}
                                                                 +$
                                                                 {parseFloat(
-                                                                  el.price
+                                                                  el.price,
                                                                 ).toFixed(2)}
                                                               </small>
                                                             </li>
-                                                          )
+                                                          ),
                                                       )}
                                                     </ul>
                                                   </div>
@@ -6493,7 +6497,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6518,7 +6522,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6547,7 +6551,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6577,7 +6581,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6637,7 +6641,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6662,7 +6666,7 @@ const page = () => {
                                                             .map(
                                                               (el) =>
                                                                 el[0].toUpperCase() +
-                                                                el.slice(1)
+                                                                el.slice(1),
                                                             )
                                                             .join(" ")}
                                                         </small>
@@ -6676,7 +6680,7 @@ const page = () => {
                                                 ""
                                               )}
                                             </>
-                                          )
+                                          ),
                                         )}
                                         {/* special instruction start */}
                                         {item.infoCustomThreeTopping[0]
@@ -6725,8 +6729,8 @@ const page = () => {
                                               $
                                               {parseFloat(
                                                 Number(
-                                                  item.totalPrice.split("$")[1]
-                                                ) * item.quantity
+                                                  item.totalPrice.split("$")[1],
+                                                ) * item.quantity,
                                               ).toFixed(2)}
                                             </small>
                                           </div>
@@ -6734,7 +6738,7 @@ const page = () => {
                                       </>
                                     ) : (
                                       ""
-                                    )
+                                    ),
                                   )}
                                 </div>
                               </div>
@@ -6753,21 +6757,28 @@ const page = () => {
                               </p>
                               <p className="text-[12px] capitalize text-p-blue">
                                 CAD $
-                                {invoiceData?.service === "delivery" ? parseFloat(
-                                  Number(
-                                    invoiceData?.orderPrice.split("$")[1]
-                                  ) - 5 -
-                                    Number(
-                                      invoiceData?.orderPriceTax.split("$")[1]
-                                    )
-                                ).toFixed(2) : parseFloat(
-                                  Number(
-                                    invoiceData?.orderPrice.split("$")[1]
-                                  ) -
-                                    Number(
-                                      invoiceData?.orderPriceTax.split("$")[1]
-                                    )
-                                ).toFixed(2)}
+                                {invoiceData?.service === "delivery"
+                                  ? parseFloat(
+                                      Number(
+                                        invoiceData?.orderPrice.split("$")[1],
+                                      ) -
+                                        5 -
+                                        Number(
+                                          invoiceData?.orderPriceTax.split(
+                                            "$",
+                                          )[1],
+                                        ),
+                                    ).toFixed(2)
+                                  : parseFloat(
+                                      Number(
+                                        invoiceData?.orderPrice.split("$")[1],
+                                      ) -
+                                        Number(
+                                          invoiceData?.orderPriceTax.split(
+                                            "$",
+                                          )[1],
+                                        ),
+                                    ).toFixed(2)}
                               </p>
                             </div>
 

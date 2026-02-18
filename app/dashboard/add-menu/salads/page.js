@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import React, { useEffect, useState } from "react";
 import { Input, Select } from "antd";
 import axios from "axios";
@@ -13,7 +13,7 @@ const { Option } = Select;
 const SaladForm = () => {
   const data = useSelector((state) => state);
   const [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   const [updateButton, setUpdateButton] = useState(false);
   const [saladData, setSaladData] = useState({
@@ -27,14 +27,12 @@ const SaladForm = () => {
     },
     branch: data.userData.userInfo && data.userData.userInfo.branchName,
   });
- const servedWith = ["GARLIC TOAST"]
+  const servedWith = ["GARLIC TOAST"];
 
   const handleChange = (value, field) => {
     setUpdateButton(true);
 
-    
-      setSaladData({ ...saladData, [field]: value });
-   
+    setSaladData({ ...saladData, [field]: value });
   };
 
   const handlePriceChange = (value, size) => {
@@ -51,8 +49,8 @@ const SaladForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/salad",
-        saladData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/salad",
+        saladData,
       )
       .then((res) => {
         if (res.data.message === "Your Salad Item Successfully Created!!") {
@@ -82,10 +80,10 @@ const SaladForm = () => {
   const handleDelete = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/deletesalad",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletesalad",
         {
           id: _id,
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -95,7 +93,7 @@ const SaladForm = () => {
   const [allSalads, setAllSalads] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/getsalads")
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getsalads")
       .then((res) => {
         setAllSalads(res.data);
       });
@@ -158,11 +156,11 @@ const SaladForm = () => {
   const handleUpdate = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/updatesalad",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatesalad",
         {
           id: editID,
           updatedSalad: saladData,
-        }
+        },
       )
       .then((res) => {
         if (res.data.message === "Your Salad Item Successfully Updated!!") {
@@ -192,11 +190,11 @@ const SaladForm = () => {
   const handleNotAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/saladstatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/saladstatus",
         {
           id: _id,
           status: "not-available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -206,11 +204,11 @@ const SaladForm = () => {
   const handleAvailable = (_id) => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/saladstatus",
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/saladstatus",
         {
           id: _id,
           status: "available",
-        }
+        },
       )
       .then(() => {
         location.reload();
@@ -297,8 +295,15 @@ const SaladForm = () => {
           {allSalads.map(
             (item, index) =>
               item.branch === branch && (
-                <div className="w-full p-3 md:w-[32%] bg-p-yellow flex flex-col gap-y-3" key={index}>
-                  <img src={item.image} alt={item.name} className="w-full h-auto" />
+                <div
+                  className="w-full p-3 md:w-[32%] bg-p-yellow flex flex-col gap-y-3"
+                  key={index}
+                >
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="w-full h-auto"
+                  />
 
                   <h4 className="text-[20px] text-p-red mt-3 font-semibold capitalize ">
                     {item.name}
@@ -309,7 +314,10 @@ const SaladForm = () => {
                     </h4>
                     <ul className="flex flex-wrap gap-3">
                       {item.servedWith.map((servedWithItem, index) => (
-                        <li className="p-1 rounded-lg text-[10px] text-white bg-green-700" key={index}>
+                        <li
+                          className="p-1 rounded-lg text-[10px] text-white bg-green-700"
+                          key={index}
+                        >
                           {servedWithItem}
                         </li>
                       ))}
@@ -333,7 +341,8 @@ const SaladForm = () => {
                   <div className="text-end">
                     <small className="font-semibold text-p-brown">
                       Created: {formatDateTime(item.createdAt)}
-                    </small><br />
+                    </small>
+                    <br />
                     <small className="font-semibold text-p-brown">
                       Last Update: {formatDateTime(item.updatedAt)}
                     </small>
@@ -379,7 +388,7 @@ const SaladForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>
@@ -388,4 +397,3 @@ const SaladForm = () => {
 };
 
 export default SaladForm;
-

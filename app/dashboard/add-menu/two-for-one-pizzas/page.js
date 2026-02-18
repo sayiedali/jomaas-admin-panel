@@ -15,7 +15,7 @@ const { Option } = Select;
 const TwoForOnePizzasForm = () => {
   const data = useSelector((state) => state);
   const [branch, setBranch] = useState(
-    data.userData.userInfo && data.userData.userInfo.branchName
+    data.userData.userInfo && data.userData.userInfo.branchName,
   );
   const [updateButton, setUpdateButton] = useState(false);
   const [twoForOnePizzasData, setTwoForOnePizzasData] = useState({
@@ -48,8 +48,8 @@ const TwoForOnePizzasForm = () => {
   const handleSubmit = () => {
     axios
       .post(
-        "https://jomaas-backend.onrender.com/api/v1/add-menu/twoforonepizza",
-        twoForOnePizzasData
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/twoforonepizza",
+        twoForOnePizzasData,
       )
       .then((res) => {
         if (
@@ -80,13 +80,16 @@ const TwoForOnePizzasForm = () => {
 
   const handleDelete = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/deletetwoforonepizza", {
-        id: _id,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/deletetwoforonepizza",
+        {
+          id: _id,
+        },
+      )
       .then(() => {
         toast.success("Your Two-for-One Pizza Item Successfully Deleted!!");
         setAllTwoForOnePizzas(
-          allTwoForOnePizzas.filter((item) => item._id !== _id)
+          allTwoForOnePizzas.filter((item) => item._id !== _id),
         );
       })
       .catch((error) => {
@@ -97,10 +100,13 @@ const TwoForOnePizzasForm = () => {
 
   const handleUpdate = () => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/updatetwoforonepizza", {
-        id: editID,
-        updatedTwoForOnePizza: twoForOnePizzasData,
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/updatetwoforonepizza",
+        {
+          id: editID,
+          updatedTwoForOnePizza: twoForOnePizzasData,
+        },
+      )
       .then((res) => {
         if (
           res.data.message ===
@@ -120,10 +126,13 @@ const TwoForOnePizzasForm = () => {
 
   const handleNotAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/twoforonepizzastatus", {
-        id: _id,
-        status: "not-available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/twoforonepizzastatus",
+        {
+          id: _id,
+          status: "not-available",
+        },
+      )
       .then(() => {
         toast.success("Your Two-for-One Pizza Status Updated");
         location.reload();
@@ -131,17 +140,20 @@ const TwoForOnePizzasForm = () => {
       .catch((error) => {
         console.error("Error updating two for one pizza status:", error);
         toast.error(
-          "Error updating two for one pizza status. Please try again."
+          "Error updating two for one pizza status. Please try again.",
         );
       });
   };
 
   const handleAvailable = (_id) => {
     axios
-      .post("https://jomaas-backend.onrender.com/api/v1/add-menu/twoforonepizzastatus", {
-        id: _id,
-        status: "available",
-      })
+      .post(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/twoforonepizzastatus",
+        {
+          id: _id,
+          status: "available",
+        },
+      )
       .then(() => {
         toast.success("Your Two-for-One Pizza Status Updated");
         location.reload();
@@ -149,7 +161,7 @@ const TwoForOnePizzasForm = () => {
       .catch((error) => {
         console.error("Error updating two for one pizza status:", error);
         toast.error(
-          "Error updating two for one pizza status. Please try again."
+          "Error updating two for one pizza status. Please try again.",
         );
       });
   };
@@ -157,7 +169,9 @@ const TwoForOnePizzasForm = () => {
   let [allTwoForOnePizzas, setAllTwoForOnePizzas] = useState([]);
   useEffect(() => {
     axios
-      .get("https://jomaas-backend.onrender.com/api/v1/add-menu/gettwoforonepizza")
+      .get(
+        "https://jomaasbackendai.onrender.com/api/v1/add-menu/gettwoforonepizza",
+      )
       .then((res) => {
         setAllTwoForOnePizzas(res.data);
       });
@@ -178,9 +192,11 @@ const TwoForOnePizzasForm = () => {
   //   get all pizza names
   let [allPizzasNames, setAllPizzasNames] = useState([]);
   useEffect(() => {
-    axios.get("https://jomaas-backend.onrender.com/api/v1/add-menu/getpizza").then((res) => {
-      setAllPizzasNames(res.data);
-    });
+    axios
+      .get("https://jomaasbackendai.onrender.com/api/v1/add-menu/getpizza")
+      .then((res) => {
+        setAllPizzasNames(res.data);
+      });
   }, []);
 
   let [edit, setEdit] = useState(false);
@@ -376,7 +392,7 @@ const TwoForOnePizzasForm = () => {
                     )}
                   </div>
                 </div>
-              )
+              ),
           )}
         </div>
       </div>
